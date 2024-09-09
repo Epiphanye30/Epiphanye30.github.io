@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .gallery-item {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(33.33% - 40px);
+            box-sizing: border-box;
+        }
+        .gallery-item img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .description {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+        }
+        @media (max-width: 768px) {
+            .gallery-item {
+                width: calc(50% - 40px);
+            }
+        }
+        @media (max-width: 480px) {
+            .gallery-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Image Gallery</h1>
+<div class="gallery" id="gallery"></div>
+
+<script>
+    const images = ['media/cathedral.jpg_out.jpg', 'media/church.tif_out.jpg', 'media/emir.tif_out.jpg', 'media/harvesters.tif_out.jpg', 'media/icon.tif_out.jpg', 'media/lady.tif_out.jpg', 'media/melons.tif_out.jpg', 'media/monastery.jpg_out.jpg', 'media/onion_church.tif_out.jpg', 'media/sculpture.tif_out.jpg', 'media/self_portrait.tif_out.jpg', 'media/three_generations.tif_out.jpg', 'media/tobolsk.jpg_out.jpg', 'media/train.tif_out.jpg'];
+
+    const galleryElement = document.getElementById('gallery');
+
+    images.forEach((src) => {
+        const galleryItem = document.createElement('div');
+        galleryItem.classList.add('gallery-item');
+
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = src.split('/').pop(); // 使用文件名作为alt文本
+
+        const description = document.createElement('div');
+        description.classList.add('description');
+        description.textContent = src.split('/').pop(); // 使用文件名作为描述
+
+        galleryItem.appendChild(img);
+        galleryItem.appendChild(description);
+        galleryElement.appendChild(galleryItem);
+    });
+</script>
+
+</body>
+</html>
