@@ -1,79 +1,156 @@
+<!-- GPT is used for creating this page. Link: https://chatgpt.com/share/7148d375-67b9-4422-9ec4-5f41578f3ff4 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Gallery</title>
+    <title>My Portfolio - Project 1</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f0f0f0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin: 20px auto;
         }
         .gallery {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
         }
         .gallery-item {
-            background-color: #fff;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            width: calc(33.33% - 40px);
-            box-sizing: border-box;
+            flex-basis: calc(50% - 20px); /* Two images per row */
+            text-align: center;
         }
-        .gallery-item img {
+        .gallery img {
+            width: 100%;
+            height: auto;
             max-width: 100%;
             border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .description {
+        .gallery-item .description {
             margin-top: 10px;
-            text-align: center;
             font-size: 14px;
-            color: #333;
+            color: #555;
         }
-        @media (max-width: 768px) {
-            .gallery-item {
-                width: calc(50% - 40px);
-            }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
-        @media (max-width: 480px) {
-            .gallery-item {
-                width: 100%;
-            }
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            text-align: center;
+            color: #777;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Welcome to My CS180 Portfolio!</h1>
 
-<h1>Image Gallery</h1>
-<div class="gallery" id="gallery"></div>
+        <h2>Project 1: Image Alignment</h2>
+        
+        <p>
+            Two algorithms are implemented for this project, the naive one and the multi-pyramid one.
+            For the naive one, exhaustive search is used in a square area of edge length 30. L2 distance was used first but altered to 
+            Normalized Cross-Correlation so that the difference of overall lightness will not affect the matching.
+        </p>
+        <p>Here are some small images processed using this algorithm (as it would take forever to search in a huge area for large pictures):</p>
+        
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="media/cathedral.jpg_out.jpg" alt="Processed Cathedral Image">
+                <div class="description">cathedral.jpg_out.jpg</div>
+            </div>
+            <div class="gallery-item">
+                <img src="media/monastery.jpg_out.jpg" alt="Processed Monastery Image">
+                <div class="description">monastery.jpg_out.jpg</div>
+            </div>
+            <div class="gallery-item">
+                <img src="media/tobolsk.jpg_out.jpg" alt="Processed Tobolsk Image">
+                <div class="description">tobolsk.jpg_out.jpg</div>
+            </div>
+        </div>
 
-<script>
-    const images = ['media/cathedral.jpg_out.jpg', 'media/church.tif_out.jpg', 'media/emir.tif_out.jpg', 'media/harvesters.tif_out.jpg', 'media/icon.tif_out.jpg', 'media/lady.tif_out.jpg', 'media/melons.tif_out.jpg', 'media/monastery.jpg_out.jpg', 'media/onion_church.tif_out.jpg', 'media/sculpture.tif_out.jpg', 'media/self_portrait.tif_out.jpg', 'media/three_generations.tif_out.jpg', 'media/tobolsk.jpg_out.jpg', 'media/train.tif_out.jpg'];
+        <p>
+            The multi-pyramid algorithm handles large images. It first resizes each image several times—each time reducing the height and width by half—until 
+            the image is small enough (e.g., width &lt; 64 pixels). Next, the naive algorithm is applied to the smallest image to get the best shifting vector 
+            <code>v</code>. Then, the algorithm searches bigger images based on the previous shifting vector scaled by 2 (<code>2 &bull; v</code>), but within a small 
+            search area (-2 to 2). This process continues until we get the best shifting vector for the original image.
+        </p>
+        
+        <p>Here are some large images processed with this algorithm:</p>
 
-    const galleryElement = document.getElementById('gallery');
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="media/church.tif_out.jpg" alt="Processed Church Image">
+                <div class="description">church.tif_out.jpg</div>
+            </div>
+            <div class="gallery-item">
+                <img src="media/harvesters.tif_out.jpg" alt="Processed Harvesters Image">
+                <div class="description">harvesters.tif_out.jpg</div>
+            </div>
+            <div class="gallery-item">
+                <img src="media/icon.tif_out.jpg" alt="Processed Icon Image">
+                <div class="description">icon.tif_out.jpg</div>
+            </div>
+            <div class="gallery-item">
+                <img src="media/lady.tif_out.jpg" alt="Processed Lady Image">
+                <div class="description">lady.tif_out.jpg</div>
+            </div>
+            <div class="gallery-item">
+                <img src="media/melons.tif_out.jpg" alt="Processed Melons Image">
+                <div class="description">melons.tif_out.jpg</div>
+            </div>
+            <div class="gallery-item">
+                <img src="media/onion_church.tif_out.jpg" alt="Processed Onion Church Image">
+                <div class="description">onion_church.tif_out.jpg</div>
+            </div>
+            <div class="gallery-item">
+                <img src="media/sculpture.tif_out.jpg" alt="Processed Sculpture Image">
+                <div class="description">sculpture.tif_out.jpg</div>
+            </div>
+            <div class="gallery-item">
+                <img src="media/self_portrait.tif_out.jpg" alt="Processed Self Portrait Image">
+                <div class="description">self_portrait.tif_out.jpg</div>
+            </div>
+            <div class="gallery-item">
+                <img src="media/three_generations.tif_out.jpg" alt="Processed Three Generations Image">
+                <div class="description">three_generations.tif_out.jpg</div>
+            </div>
+            <div class="gallery-item">
+                <img src="media/train.tif_out.jpg" alt="Processed Train Image">
+                <div class="description">train.tif_out.jpg</div>
+            </div>
+        </div>
+    </div>
 
-    images.forEach((src) => {
-        const galleryItem = document.createElement('div');
-        galleryItem.classList.add('gallery-item');
-
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = src.split('/').pop(); // 使用文件名作为alt文本
-
-        const description = document.createElement('div');
-        description.classList.add('description');
-        description.textContent = src.split('/').pop(); // 使用文件名作为描述
-
-        galleryItem.appendChild(img);
-        galleryItem.appendChild(description);
-        galleryElement.appendChild(galleryItem);
-    });
-</script>
-
+    <footer>
+        &copy; 2024 My Portfolio - Project 1
+    </footer>
 </body>
 </html>
